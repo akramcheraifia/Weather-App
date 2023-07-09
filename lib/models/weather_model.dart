@@ -27,4 +27,8 @@ class WeatherModel {
           ['icon'],
     );
   }
+  @override
+  String toString() {
+    return 'WeatherModel(date: $date, temp: $temp, maxtemp: $maxtemp, mintemp: $mintemp, weatherStateName: $weatherStateName, weatherIcon: $weatherIcon)';
+  }
 }
