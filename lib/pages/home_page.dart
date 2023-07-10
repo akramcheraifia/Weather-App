@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:weather_app/models/weather_model.dart';
 import 'package:weather_app/pages/search_page.dart';
+import 'package:weather_app/providers/weather_provider.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
   WeatherModel? weatherData;
+
   @override
   Widget build(BuildContext context) {
+    weatherData = Provider.of<WeatherProvider>(context).weatherData;
     return Scaffold(
         appBar: AppBar(
           title: const Text('Weather App'),
+          backgroundColor: Colors.blueGrey[900],
           actions: [
             IconButton(
               icon: const Icon(Icons.search),
@@ -40,26 +45,29 @@ class HomePage extends StatelessWidget {
                     ),
                     Column(
                       children: [
-                        Text("Cairo",
+                        Text(
+                            "${Provider.of<WeatherProvider>(context, listen: false).cityName}",
                             style: TextStyle(
                                 fontSize: 30, fontWeight: FontWeight.bold)),
-                        Text("date")
+                        Text(weatherData!.date),
                       ],
                     ),
                     Spacer(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Icon(Icons.cloud),
-                        Text("39",
+                        Image.network("https:${weatherData!.weatherIcon}"),
+                        Text(weatherData!.temp.toInt().toString(),
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold)),
                         Column(
                           children: [
-                            Text("Max: 40",
+                            Text(
+                                "Max:${weatherData!.maxtemp.toInt().toString()}",
                                 style: TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.bold)),
-                            Text("min : 20",
+                            Text(
+                                "min : ${weatherData!.mintemp.toInt().toString()}",
                                 style: TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.bold))
                           ],
@@ -67,7 +75,7 @@ class HomePage extends StatelessWidget {
                       ],
                     ),
                     Spacer(),
-                    Text("Clear",
+                    Text(weatherData!.weatherStateName,
                         style: TextStyle(
                             fontSize: 30, fontWeight: FontWeight.bold)),
                     Spacer(
