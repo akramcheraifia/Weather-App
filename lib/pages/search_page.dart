@@ -38,7 +38,7 @@ class SearchPage extends StatelessWidget {
                 labelText: 'Enter a city name',
                 contentPadding:
                     EdgeInsets.symmetric(vertical: 35, horizontal: 10),
-                hintText: 'e.g. London',
+                hintText: 'e.g. Souk ahras',
                 filled: true,
               ),
             ),
